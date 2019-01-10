@@ -1,5 +1,5 @@
 /*
- * Copyright 2018 SUSE LINUX GmbH, Nuernberg, Germany..
+ * Copyright 2019 SUSE LINUX GmbH, Nuernberg, Germany..
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -138,6 +138,34 @@ type FeaturesConfiguration struct {
 type ServicesConfiguration struct {
 }
 
+// BootstrapConfiguration se the required configuration
+// for bootstraping kubic-init
+type BootstrapConfiguration struct {
+	Registries []Registry `yaml:"registries,omitempty"`
+}
+
+// Registry struct
+// Defines a registry mirror
+// Prefix: string of the registry that will be replaced
+// Mirrors: array with the values to replace the `Prefix`
+type Registry struct {
+	Prefix  string   `yaml:"prefix"`
+	Mirrors []Mirror `yaml:"mirrors"`
+}
+
+// Mirror struct
+// Defines the Mirrors to be used
+// URL: url of the mirror registry.
+// Certificate: certificate content for the registry.
+// Fingerprint: fingerprint of the certificate to check validity.
+// HashAlgorithm: hash algorithm used.
+type Mirror struct {
+	URL           string `yaml:"url"`
+	Certificate   string `yaml:"certificate,omitempty"`
+	Fingerprint   string `yaml:"fingerprint,omitempty"`
+	HashAlgorithm string `yaml:"hashalgorithm,omitempty"`
+}
+
 // KubicInitConfiguration The kubic-init configuration
 //
 // +genclient
@@ -155,6 +183,7 @@ type KubicInitConfiguration struct {
 	Features         FeaturesConfiguration         `yaml:"features,omitempty"`
 	Services         ServicesConfiguration         `yaml:"services,omitempty"`
 	Auth             AuthConfiguration             `yaml:"auth,omitempty"`
+	Bootstrap        BootstrapConfiguration        `yaml:"bootstrap,omitempty"`
 }
 
 // defaultConfiguration is the default configuration
@@ -189,6 +218,7 @@ var defaultConfiguration = KubicInitConfiguration{
 	Features: FeaturesConfiguration{
 		PSP: true,
 	},
+	Bootstrap: BootstrapConfiguration{},
 }
 
 // FileAndDefaultsToKubicInitConfig Load a Kubic configuration file, setting some default values

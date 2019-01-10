@@ -13,10 +13,10 @@ kind: KubicInitConfiguration
 #   oidc:
 #     # will use the <network.DNS.ExternalFQDN>:32000 by default
 #     issuer: https://some.name.com:32000
-#	  clientID: kubernetes
-#	  ca: /etc/kubernetes/pki/ca.crt
-#	  username: email
-#	  groups: groups
+#     clientID: kubernetes
+#     ca: /etc/kubernetes/pki/ca.crt
+#     username: email
+#     groups: groups
 # certificates:
 #   # where certificates are stored
 #   directory: /etc/kubernetes/pki
@@ -70,3 +70,32 @@ kind: KubicInitConfiguration
 #     # do not set this unless you _really_ want to use something different that the
 #     # default one (ie, for using a experimental version)
 #     image: registry.opensuse.org/devel/caasp/kubic-container/container/kubic/flannel:0.9.1
+# # the mirrors section will let you configure mirrors for the registries
+# # multiple mirrors can be set
+# # each mirror can have multiple fallback addresses
+# bootstrap:
+#   registries:
+#     - prefix: https://registry.suse.com
+#       mirrors:
+#         - url: https://airgapped.suse.com
+#         - url: https://airgapped2.suse.com
+#           certificate: "-----BEGIN CERTIFICATE-----
+#   MIIGJzCCBA+gAwIBAgIBATANBgkqhkiG9w0BAQUFADCBsjELMAkGA1UEBhMCRlIx
+#   DzANBgNVBAgMBkFsc2FjZTETMBEGA1UEBwwKU3RyYXNib3VyZzEYMBYGA1UECgwP
+#   hnx8SB3sVJZHeer8f/UQQwqbAO+Kdy70NmbSaqaVtp8jOxLiidWkwSyRTsuU6D8i
+#   DiH5uEqBXExjrj0FslxcVKdVj5glVcSmkLwZKbEU1OKwleT/iXFhvooWhQ==
+#   -----END CERTIFICATE-----"
+#           fingerprint: "E8:73:0C:C5:84:B1:EB:17:2D:71:54:4D:89:13:EE:47:36:43:8D:BF:5D:3C:0F:5B:FC:75:7E:72:28:A9:7F:73"
+#           hashalgorithm: "SHA256"
+#     - prefix: https://registry.io
+#       mirrors:
+#         - url: https://airgapped.suse.com
+#         - url: https://airgapped2.suse.com
+#           certificate: "-----BEGIN CERTIFICATE-----
+#   MIIGJzCCBA+gAwIBAgIBATANBgkqhkiG9w0BAQUFADCBsjELMAkGA1UEBhMCRlIx
+#   DzANBgNVBAgMBkFsc2FjZTETMBEGA1UEBwwKU3RyYXNib3VyZzEYMBYGA1UECgwP
+#   hnx8SB3sVJZHeer8f/UQQwqbAO+Kdy70NmbSaqaVtp8jOxLiidWkwSyRTsuU6D8i
+#   DiH5uEqBXExjrj0FslxcVKdVj5glVcSmkLwZKbEU1OKwleT/iXFhvooWhQ==<
+#   -----END CERTIFICATE-----"
+#           fingerprint: "E8:73:0C:C5:84:B1:EB:17:2D:71:54:4D:89:13:EE:47:36:43:8D:BF:5D:3C:0F:5B:FC:75:7E:72:28:A9:7F:73"
+#           hashalgorithm: "SHA256"
